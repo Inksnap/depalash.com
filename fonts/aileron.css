@@ -1,0 +1,47 @@
+/* Aileron Regular */
+@font-face {
+    font-family: 'Aileron';
+    src: local('Aileron'),
+         local('Aileron-Regular'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-Regular.woff2') format('woff2'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Aileron Bold */
+@font-face {
+    font-family: 'Aileron';
+    src: local('Aileron Bold'),
+         local('Aileron-Bold'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-Bold.woff2') format('woff2'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Aileron SemiBold */
+@font-face {
+    font-family: 'Aileron';
+    src: local('Aileron SemiBold'),
+         local('Aileron-SemiBold'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-SemiBold.woff2') format('woff2'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Aileron Light */
+@font-face {
+    font-family: 'Aileron';
+    src: local('Aileron Light'),
+         local('Aileron-Light'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-Light.woff2') format('woff2'),
+         url('https://fonts.cdnfonts.com/s/15319/Aileron-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+} 
