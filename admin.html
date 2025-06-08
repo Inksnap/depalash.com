@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrintPalash - Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/aileron.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Aileron', 'Helvetica Neue', Arial, sans-serif;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .upload-section {
+            margin: 20px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .upload-section h2 {
+            margin-bottom: 15px;
+            color: #FF0009;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .preview-image {
+            max-width: 200px;
+            margin-top: 10px;
+        }
+        button {
+            background: #FF0009;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        button:hover {
+            background: #cc0007;
+        }
+        .current-image {
+            margin-top: 10px;
+        }
+        .current-image img {
+            max-width: 200px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PrintPalash Admin - Hero Image Management</h1>
+
+    <div class="upload-section">
+        <h2>Hero Circle Background</h2>
+        <div class="form-group">
+            <div class="current-image">
+                <p>Current Image:</p>
+                <img src="images/hero/circle-bg.png" alt="Current Hero Circle">
+            </div>
+            <label for="circle-bg">Upload New Circle Background:</label>
+            <input type="file" id="circle-bg" accept="image/*" onchange="previewImage(this, 'circle-preview')">
+            <div id="circle-preview" class="preview-image"></div>
+            <button onclick="uploadImage('circle-bg', 'circle-bg.png')">Upload Circle Background</button>
+        </div>
+    </div>
+
+    <div class="upload-section">
+        <h2>Hero Image 1</h2>
+        <div class="form-group">
+            <div class="current-image">
+                <p>Current Image:</p>
+                <img src="images/hero/print-sample-1.jpg" alt="Current Hero Image 1">
+            </div>
+            <label for="hero1">Upload New Hero Image 1:</label>
+            <input type="file" id="hero1" accept="image/*" onchange="previewImage(this, 'hero1-preview')">
+            <div id="hero1-preview" class="preview-image"></div>
+            <button onclick="uploadImage('hero1', 'print-sample-1.jpg')">Upload Hero Image 1</button>
+        </div>
+    </div>
+
+    <div class="upload-section">
+        <h2>Hero Image 2</h2>
+        <div class="form-group">
+            <div class="current-image">
+                <p>Current Image:</p>
+                <img src="images/hero/print-sample-2.jpg" alt="Current Hero Image 2">
+            </div>
+            <label for="hero2">Upload New Hero Image 2:</label>
+            <input type="file" id="hero2" accept="image/*" onchange="previewImage(this, 'hero2-preview')">
+            <div id="hero2-preview" class="preview-image"></div>
+            <button onclick="uploadImage('hero2', 'print-sample-2.jpg')">Upload Hero Image 2</button>
+        </div>
+    </div>
+
+    <div class="upload-section">
+        <h2>Hero Image 3</h2>
+        <div class="form-group">
+            <div class="current-image">
+                <p>Current Image:</p>
+                <img src="images/hero/print-sample-3.jpg" alt="Current Hero Image 3">
+            </div>
+            <label for="hero3">Upload New Hero Image 3:</label>
+            <input type="file" id="hero3" accept="image/*" onchange="previewImage(this, 'hero3-preview')">
+            <div id="hero3-preview" class="preview-image"></div>
+            <button onclick="uploadImage('hero3', 'print-sample-3.jpg')">Upload Hero Image 3</button>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(input, previewId) {
+            const preview = document.getElementById(previewId);
+            const file = input.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.innerHTML = `<img src="${e.target.result}" style="max-width: 200px;">`;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function uploadImage(inputId, filename) {
+            const input = document.getElementById(inputId);
+            const file = input.files[0];
+            
+            if (!file) {
+                alert('Please select a file first');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('filename', filename);
+
+            try {
+                const response = await fetch('/upload-hero-image.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    alert('Image uploaded successfully!');
+                    location.reload();
+                } else {
+                    alert('Error uploading image: ' + result.message);
+                }
+            } catch (error) {
+                alert('Error uploading image: ' + error.message);
+            }
+        }
+    </script>
+</body>
+</html> 
